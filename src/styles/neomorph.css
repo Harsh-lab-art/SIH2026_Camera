@@ -1,0 +1,385 @@
+:root {
+  /* ============================================
+     NEOMORPHISM TOKENS — light theme
+     neo-light = #ffffff  neo-dark = #c6cdd8
+     bg = #eef1f5
+     ============================================ */
+
+  --neo-bg: #eef1f5;
+
+  /* Raised */
+  --shadow-neo-raised:
+    6px  6px 14px 0 var(--neo-dark),
+   -6px -6px 14px 0 var(--neo-light);
+
+  /* Pressed / inset */
+  --shadow-neo-pressed:
+    inset  4px  4px 10px 0 var(--neo-dark),
+    inset -4px -4px 10px 0 var(--neo-light);
+
+  /* Subtle raised */
+  --shadow-neo-subtle:
+    3px  3px  8px 0 var(--neo-dark),
+   -3px -3px  8px 0 var(--neo-light);
+
+  /* Subtle pressed */
+  --shadow-neo-subtle-pressed:
+    inset  3px  3px  8px 0 var(--neo-dark),
+    inset -3px -3px  8px 0 var(--neo-light);
+
+  /* Accent: blue */
+  --shadow-neo-primary-raised:
+    6px  6px 14px 0 var(--neo-dark),
+   -6px -6px 14px 0 var(--neo-light);
+
+  --shadow-neo-primary-pressed:
+    inset  4px  4px 10px 0 var(--neo-dark),
+    inset -4px -4px 10px 0 var(--neo-light);
+
+  /* Accent: green */
+  --shadow-neo-success-raised:
+    6px  6px 14px 0 var(--neo-dark),
+   -6px -6px 14px 0 var(--neo-light);
+
+  --shadow-neo-success-pressed:
+    inset  4px  4px 10px 0 var(--neo-dark),
+    inset -4px -4px 10px 0 var(--neo-light);
+
+  /* Accent: amber / warning */
+  --shadow-neo-warning-raised:
+    6px  6px 14px 0 var(--neo-dark),
+   -6px -6px 14px 0 var(--neo-light);
+
+  /* Accent: red / error */
+  --shadow-neo-error-raised:
+    6px  6px 14px 0 var(--neo-dark),
+   -6px -6px 14px 0 var(--neo-light);
+
+  /* Gradient for neo surfaces */
+  --neo-gradient:         linear-gradient(145deg, #f4f6fa 0%, #e4e9f0 100%);
+  --neo-gradient-primary: linear-gradient(145deg, #f4f6fa 0%, #e4e9f0 100%);
+  --neo-gradient-success: linear-gradient(145deg, #f4f6fa 0%, #e4e9f0 100%);
+}
+
+/* ============================================
+   NEOMORPHISM UTILITY CLASSES
+   ============================================ */
+
+.neo {
+  background: var(--neo-bg);
+  box-shadow: var(--shadow-neo-raised);
+  border-radius: var(--radius-xl);
+  border: none;
+  transition: box-shadow var(--duration-normal) var(--ease-out),
+              transform   var(--duration-fast)   var(--ease-out);
+}
+
+.neo-raised {
+  background:  var(--neo-bg);
+  box-shadow:  var(--shadow-neo-raised);
+  border-radius: var(--radius-xl);
+}
+
+.neo-pressed {
+  background:  var(--neo-bg);
+  box-shadow:  var(--shadow-neo-pressed);
+  border-radius: var(--radius-xl);
+}
+
+.neo-subtle {
+  background:  var(--neo-bg);
+  box-shadow:  var(--shadow-neo-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.neo-subtle-pressed {
+  background:  var(--neo-bg);
+  box-shadow:  var(--shadow-neo-subtle-pressed);
+  border-radius: var(--radius-lg);
+}
+
+/* Interactive */
+.neo-interactive {
+  background:  var(--neo-bg);
+  box-shadow:  var(--shadow-neo-raised);
+  border-radius: var(--radius-xl);
+  border: none;
+  cursor: pointer;
+  transition: box-shadow var(--duration-normal) var(--ease-out),
+              transform   var(--duration-fast)   var(--ease-out);
+}
+
+.neo-interactive:hover  { transform: translateY(-2px); }
+.neo-interactive:active { box-shadow: var(--shadow-neo-pressed); transform: translateY(0) scale(0.98); }
+.neo-interactive:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 3px; }
+
+/* ── Primary button — matches mockup .neo-button ── */
+.neo-btn-primary {
+  background:    var(--neo-bg);
+  box-shadow:    var(--shadow-neo-raised);
+  border-radius: 14px;
+  border:  none;
+  padding: 14px 28px;
+  color:   var(--color-accent-blue);
+  font-family: var(--font-sans);
+  font-size:   var(--text-body-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor:  pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-width: 180px;
+  transition: box-shadow var(--duration-normal) var(--ease-out),
+              transform   var(--duration-fast)   var(--ease-out);
+}
+
+.neo-btn-primary:hover  { transform: translateY(-2px); }
+.neo-btn-primary:active {
+  box-shadow: var(--shadow-neo-pressed);
+  transform:  scale(0.99);
+}
+.neo-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* Secondary button */
+.neo-btn-secondary {
+  background:    var(--neo-bg);
+  box-shadow:    var(--shadow-neo-subtle);
+  border-radius: var(--radius-lg);
+  border:  none;
+  padding: var(--space-3) var(--space-5);
+  color:   var(--color-fg-muted);
+  font-family: var(--font-sans);
+  font-size:   var(--text-body-sm);
+  font-weight: var(--font-weight-medium);
+  cursor:  pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  transition: box-shadow var(--duration-normal) var(--ease-out),
+              transform   var(--duration-fast)   var(--ease-out);
+}
+
+.neo-btn-secondary:hover  { transform: translateY(-1px); }
+.neo-btn-secondary:active {
+  box-shadow: var(--shadow-neo-subtle-pressed);
+  transform:  scale(0.98);
+}
+
+/* Toggle */
+.neo-toggle {
+  position: relative;
+  width: 52px; height: 30px;
+  background:    var(--neo-bg);
+  border-radius: var(--radius-full);
+  box-shadow:    var(--shadow-neo-pressed);
+  border: none;
+  cursor: pointer;
+  transition: box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.neo-toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 24px; height: 24px;
+  background: var(--neo-gradient);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-neo-subtle);
+  transition: transform var(--duration-normal) var(--ease-spring),
+              background var(--duration-normal) var(--ease-out);
+}
+
+.neo-toggle:checked::after {
+  transform: translateX(22px);
+  background: var(--color-accent-blue);
+}
+
+/* Badge */
+.neo-badge {
+  background:    var(--neo-bg);
+  box-shadow:    var(--shadow-neo-subtle);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-4);
+  font-size:   var(--text-caption);
+  font-weight: var(--font-weight-medium);
+  color:       var(--color-fg-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: none;
+}
+
+.neo-badge-verified {
+  box-shadow: var(--shadow-neo-success-raised);
+  color: var(--color-accent-green);
+}
+
+.neo-badge-verified::before {
+  content: '';
+  width: 7px; height: 7px;
+  background:    var(--color-accent-green);
+  border-radius: var(--radius-full);
+}
+
+.neo-badge-unverified {
+  box-shadow: var(--shadow-neo-warning-raised);
+  color: var(--color-accent-amber);
+}
+
+.neo-badge-unverified::before {
+  content: '';
+  width: 7px; height: 7px;
+  background:    var(--color-accent-amber);
+  border-radius: var(--radius-full);
+}
+
+.neo-badge-failed {
+  box-shadow: var(--shadow-neo-error-raised);
+  color: var(--color-accent-red);
+}
+
+.neo-badge-failed::before {
+  content: '';
+  width: 7px; height: 7px;
+  background:    var(--color-accent-red);
+  border-radius: var(--radius-full);
+}
+
+/* Card */
+.neo-card {
+  background:    var(--neo-bg);
+  box-shadow:    var(--shadow-neo-raised);
+  border-radius: 16px;
+  padding: var(--space-5);
+  border: none;
+  transition: box-shadow var(--duration-normal) var(--ease-out),
+              transform   var(--duration-normal) var(--ease-out);
+}
+
+.neo-card:hover { transform: translateY(-2px); }
+
+.neo-card-interactive { cursor: pointer; }
+.neo-card-interactive:active {
+  box-shadow: var(--shadow-neo-pressed);
+  transform: translateY(0) scale(0.99);
+}
+
+/* Progress */
+.neo-progress {
+  background:    var(--neo-bg);
+  box-shadow:    var(--shadow-neo-pressed);
+  border-radius: var(--radius-full);
+  height: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.neo-progress-fill {
+  height: 100%;
+  background:    var(--color-accent-blue);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-slow) var(--ease-out);
+  position: relative;
+}
+
+.neo-progress-fill::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%);  }
+}
+
+/* Dots */
+.neo-dot {
+  width: 10px; height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--neo-bg);
+  box-shadow:  var(--shadow-neo-subtle);
+  display: inline-block;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.neo-dot-active  { background: var(--color-accent-blue);  box-shadow: var(--shadow-neo-primary-raised); }
+.neo-dot-success { background: var(--color-accent-green); box-shadow: var(--shadow-neo-success-raised); }
+.neo-dot-warning { background: var(--color-accent-amber); box-shadow: var(--shadow-neo-warning-raised); }
+.neo-dot-error   { background: var(--color-accent-red);   box-shadow: var(--shadow-neo-error-raised);   }
+
+/* Input */
+.neo-input {
+  background:    var(--neo-bg);
+  box-shadow:    var(--shadow-neo-pressed);
+  border-radius: var(--radius-lg);
+  border: none;
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-fg-primary);
+  font-family: var(--font-sans);
+  font-size:   var(--text-body);
+  width: 100%;
+  transition: box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.neo-input::placeholder { color: var(--color-fg-disabled); }
+.neo-input:hover  { box-shadow: var(--shadow-neo-subtle-pressed); }
+.neo-input:focus  { box-shadow: var(--shadow-neo-pressed), 0 0 0 3px rgba(59,110,224,0.15); outline: none; }
+
+/* Avatar */
+.neo-avatar {
+  width: 38px; height: 38px;
+  border-radius: var(--radius-full);
+  background:  var(--neo-bg);
+  box-shadow:  var(--shadow-neo-raised);
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  color:       var(--color-fg-muted);
+  font-weight: var(--font-weight-semibold);
+  font-size:   var(--text-caption);
+  overflow: hidden;
+}
+
+.neo-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Tooltip */
+.neo-tooltip {
+  background:    var(--neo-bg);
+  box-shadow:    var(--shadow-neo-raised);
+  border-radius: var(--radius-lg);
+  padding:     var(--space-2) var(--space-3);
+  font-size:   var(--text-body-sm);
+  color:       var(--color-fg-secondary);
+  white-space: nowrap;
+  z-index:     var(--z-tooltip);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes neoPulse {
+  0%, 100% { box-shadow: var(--shadow-neo-raised); }
+  50%       { box-shadow: var(--shadow-neo-raised), 0 0 0 6px rgba(59,110,224,0.12); }
+}
+
+.neo-pulse { animation: neoPulse 2.4s ease-in-out infinite; }
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .neo-interactive, .neo-btn-primary, .neo-btn-secondary,
+  .neo-toggle, .neo-toggle::after, .neo-card, .neo-input,
+  .neo-progress-fill, .neo-dot {
+    transition-duration: var(--duration-reduced) !important;
+    animation-duration:  var(--duration-reduced) !important;
+  }
+
+  .neo-progress-fill::after { animation: none; }
+  .neo-pulse { animation: none; }
+}

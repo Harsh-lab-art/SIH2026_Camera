@@ -1,0 +1,225 @@
+@import './tokens.css';
+@import './glass.css';
+@import './neomorph.css';
+
+/* ============================================
+   CSS RESET & BASE
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100%;
+  background: var(--color-bg-primary);
+  color: var(--color-fg-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--leading-normal);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+ul, ol { list-style: none; }
+
+img { display: block; max-width: 100%; }
+
+a { color: var(--color-accent-blue); text-decoration: none; }
+
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: rgba(59, 110, 224, 0.15);
+  color: var(--color-fg-primary);
+}
+
+/* Thin scrollbar */
+::-webkit-scrollbar        { width: 5px; height: 5px; }
+::-webkit-scrollbar-track  { background: var(--color-bg-secondary); }
+::-webkit-scrollbar-thumb  { background: var(--color-border-secondary); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-fg-disabled); }
+* { scrollbar-width: thin; scrollbar-color: var(--color-border-secondary) var(--color-bg-secondary); }
+
+/* ============================================
+   GLOBAL UTILITIES
+   ============================================ */
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.flex-center  { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+
+.text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+
+.page-container {
+  display: flex;
+  min-height: 100vh;
+  background: var(--color-bg-primary);
+}
+
+.page-container.sidebar-collapsed { }
+
+.main-content {
+  flex: 1;
+  padding: var(--container-padding);
+  overflow-y: auto;
+  max-width: var(--content-max-width);
+  width: 100%;
+}
+
+.page-header    { margin-bottom: var(--space-8); }
+
+.page-title {
+  font-size:   var(--text-h1);
+  font-weight: var(--font-weight-bold);
+  color:       var(--color-fg-primary);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-2);
+}
+
+.page-subtitle {
+  font-size:   var(--text-body-lg);
+  color:       var(--color-fg-muted);
+  font-weight: var(--font-weight-normal);
+}
+
+.section        { margin-bottom: var(--space-10); }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+}
+
+.section-title {
+  font-size:   var(--text-body);
+  font-weight: var(--font-weight-semibold);
+  color:       var(--color-fg-primary);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+/* ============================================
+   DATA TABLE
+   ============================================ */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-body-sm);
+}
+
+.data-table th {
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  font-weight: var(--font-weight-semibold);
+  color:       var(--color-fg-muted);
+  font-size:   var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  border-bottom: 1px solid rgba(198, 205, 216, 0.5);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.data-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid rgba(198, 205, 216, 0.3);
+  color: var(--color-fg-secondary);
+}
+
+.data-table tr:last-child td { border-bottom: none; }
+
+.data-table tbody tr {
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.data-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* ============================================
+   STATUS INDICATORS
+   ============================================ */
+
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.status-dot.running { background: var(--color-status-running); box-shadow: 0 0 0 3px rgba(59,110,224,0.18); }
+.status-dot.success { background: var(--color-status-success); box-shadow: 0 0 0 3px rgba(31,157,107,0.18); }
+.status-dot.warning { background: var(--color-status-warning); box-shadow: 0 0 0 3px rgba(217,119,6,0.18); }
+.status-dot.error   { background: var(--color-status-error);   box-shadow: 0 0 0 3px rgba(220,38,38,0.18); }
+.status-dot.idle    { background: var(--color-status-idle); }
+
+/* ============================================
+   TYPOGRAPHY HELPERS
+   ============================================ */
+
+.eyebrow {
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-fg-disabled);
+}
+
+.font-mono { font-family: var(--font-mono); }
+
+/* ============================================
+   ANIMATION HELPERS
+   ============================================ */
+
+.animate-fade-in  { animation: fadeIn  var(--duration-normal) var(--ease-out); }
+.animate-slide-up { animation: slideUp var(--duration-normal) var(--ease-out); }
+.animate-scale-in { animation: scaleIn var(--duration-normal) var(--ease-out); }
+
+.delay-1 { animation-delay:  50ms; }
+.delay-2 { animation-delay: 100ms; }
+.delay-3 { animation-delay: 150ms; }
+.delay-4 { animation-delay: 200ms; }
+.delay-5 { animation-delay: 250ms; }
+.delay-6 { animation-delay: 300ms; }

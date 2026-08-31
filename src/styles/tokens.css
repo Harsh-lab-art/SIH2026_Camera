@@ -1,0 +1,179 @@
+:root {
+  /* ============================================
+     COLOR TOKENS — Light Minimalist Palette
+     Matches mockup: --bg #eef1f5, accent #3b6ee0
+     ============================================ */
+
+  /* Background layers */
+  --color-bg-primary:   #eef1f5;
+  --color-bg-secondary: #e4e9f0;
+  --color-bg-tertiary:  #d8dfea;
+  --color-bg-hover:     #dde3ee;
+  --color-bg-active:    #cdd5e3;
+  --color-bg-surface:   #ffffff;
+
+  /* Foreground / Text */
+  --color-fg-primary:   #1c2230;
+  --color-fg-secondary: #3b4560;
+  --color-fg-muted:     #626c7d;
+  --color-fg-disabled:  #98a1b0;
+
+  /* Accent — blue from mockup */
+  --color-accent-blue:       #3b6ee0;
+  --color-accent-blue-hover: #2b5ccc;
+  --color-accent-blue-muted: rgba(59, 110, 224, 0.12);
+
+  /* Success green */
+  --color-accent-green:       #1f9d6b;
+  --color-accent-green-hover: #178058;
+  --color-accent-green-muted: rgba(31, 157, 107, 0.12);
+
+  /* Amber */
+  --color-accent-amber:       #d97706;
+  --color-accent-amber-hover: #b45309;
+  --color-accent-amber-muted: rgba(217, 119, 6, 0.12);
+
+  /* Red */
+  --color-accent-red:       #dc2626;
+  --color-accent-red-hover: #b91c1c;
+  --color-accent-red-muted: rgba(220, 38, 38, 0.12);
+
+  /* Borders */
+  --color-border-primary:   rgba(255, 255, 255, 0.35);
+  --color-border-secondary: #c6cdd8;
+  --color-border-focus:     #3b6ee0;
+
+  /* Status semantic */
+  --color-status-idle:       #98a1b0;
+  --color-status-running:    #3b6ee0;
+  --color-status-success:    #1f9d6b;
+  --color-status-warning:    #d97706;
+  --color-status-error:      #dc2626;
+  --color-status-verified:   #1f9d6b;
+  --color-status-unverified: #d97706;
+  --color-status-failed:     #dc2626;
+
+  /* ============================================
+     NEOMORPHISM SHADOW PAIRS — light theme
+     neo-light = #ffffff  neo-dark = #c6cdd8
+     ============================================ */
+  --neo-light: #ffffff;
+  --neo-dark:  #c6cdd8;
+
+  /* ============================================
+     TYPOGRAPHY TOKENS
+     ============================================ */
+
+  --font-sans: 'Inter', -apple-system, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-display: clamp(2.5rem, 5vw, 4.5rem);
+  --text-h1:      clamp(1.75rem, 4vw, 2.5rem);
+  --text-h2:      clamp(1.25rem, 3vw, 1.75rem);
+  --text-h3:      1.25rem;
+  --text-body-lg: 1.0625rem;
+  --text-body:    0.9375rem;
+  --text-body-sm: 0.8125rem;
+  --text-caption: 0.75rem;
+
+  --leading-tight:   1.1;
+  --leading-snug:    1.25;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.6;
+
+  --tracking-tight:  -0.01em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.06em;
+
+  --font-weight-normal:   400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  /* ============================================
+     SPACING TOKENS
+     ============================================ */
+
+  --space-0:  0;
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* ============================================
+     BORDER RADIUS TOKENS
+     ============================================ */
+
+  --radius-none: 0;
+  --radius-sm:   0.25rem;
+  --radius-md:   0.375rem;
+  --radius-lg:   0.625rem;
+  --radius-xl:   1rem;
+  --radius-2xl:  1.125rem;
+  --radius-full: 9999px;
+
+  /* ============================================
+     MOTION TOKENS
+     ============================================ */
+
+  --duration-fast:    150ms;
+  --duration-normal:  250ms;
+  --duration-slow:    350ms;
+  --duration-reduced: 0.01ms;
+
+  --ease-out:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ============================================
+     Z-INDEX TOKENS
+     ============================================ */
+
+  --z-base:     0;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-overlay:  300;
+  --z-modal:    400;
+  --z-popover:  500;
+  --z-tooltip:  600;
+  --z-toast:    700;
+
+  /* ============================================
+     LAYOUT TOKENS
+     ============================================ */
+
+  --sidebar-width:           260px;
+  --sidebar-collapsed-width: 68px;
+  --topbar-height:           60px;
+  --content-max-width:       1360px;
+  --container-padding:       var(--space-6);
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast:   var(--duration-reduced);
+    --duration-normal: var(--duration-reduced);
+    --duration-slow:   var(--duration-reduced);
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration:       var(--duration-reduced) !important;
+    animation-iteration-count: 1 !important;
+    transition-duration:      var(--duration-reduced) !important;
+    scroll-behavior: auto !important;
+  }
+}

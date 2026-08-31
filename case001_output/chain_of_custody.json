@@ -1,0 +1,90 @@
+[
+  {
+    "seq": 1,
+    "timestamp": "2026-08-31T16:02:47.848264Z",
+    "action": "CASE_OPENED",
+    "detail": "Case001 \u2014 simulated shop theft investigation",
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "entry_hash": "0f1d070c82db40f88690bc480ef8fb0b834f01418b3b1066918423542ea6b9d7"
+  },
+  {
+    "seq": 2,
+    "timestamp": "2026-08-31T16:02:47.848890Z",
+    "action": "DEVICE_RECEIVED",
+    "detail": "Simulated DVR hard disk received for imaging",
+    "prev_hash": "0f1d070c82db40f88690bc480ef8fb0b834f01418b3b1066918423542ea6b9d7",
+    "entry_hash": "8694f937e19772b902fa922c3bb8e1903bbb8801538f03a43d49139e6259a837"
+  },
+  {
+    "seq": 3,
+    "timestamp": "2026-08-31T16:02:47.873464Z",
+    "action": "ORIGINAL_HASHED",
+    "detail": "MD5=aec2008e4d6ee7324d9e87992311dd80",
+    "prev_hash": "8694f937e19772b902fa922c3bb8e1903bbb8801538f03a43d49139e6259a837",
+    "entry_hash": "be2b0335c31e3bcc4ead1a22fb630793de5df677b900d79ad684811411b19174"
+  },
+  {
+    "seq": 4,
+    "timestamp": "2026-08-31T16:02:47.884760Z",
+    "action": "IMAGE_ACQUIRED",
+    "detail": "Forensic image written to case001_output\\case001_disk.dd",
+    "prev_hash": "be2b0335c31e3bcc4ead1a22fb630793de5df677b900d79ad684811411b19174",
+    "entry_hash": "25039ecb707e484de832bf093e5b5307f871c219b198f6fef502d69c384d5803"
+  },
+  {
+    "seq": 5,
+    "timestamp": "2026-08-31T16:02:47.928471Z",
+    "action": "IMAGE_HASHED",
+    "detail": "MD5=aec2008e4d6ee7324d9e87992311dd80",
+    "prev_hash": "25039ecb707e484de832bf093e5b5307f871c219b198f6fef502d69c384d5803",
+    "entry_hash": "0921507cb007a1dd8f521b1b1abed763f6b0818b8e196f14dd05fd9b60a9697b"
+  },
+  {
+    "seq": 6,
+    "timestamp": "2026-08-31T16:02:47.928779Z",
+    "action": "INTEGRITY_CHECK",
+    "detail": "Match: True",
+    "prev_hash": "0921507cb007a1dd8f521b1b1abed763f6b0818b8e196f14dd05fd9b60a9697b",
+    "entry_hash": "b61b3f6e70b5d3e22283af48ea65ed649d434d97ec956ec46e506c7ba1f76356"
+  },
+  {
+    "seq": 7,
+    "timestamp": "2026-08-31T16:02:47.929093Z",
+    "action": "VENDOR_IDENTIFIED",
+    "detail": "CP Plus / CP-X2-NVR",
+    "prev_hash": "b61b3f6e70b5d3e22283af48ea65ed649d434d97ec956ec46e506c7ba1f76356",
+    "entry_hash": "5f4b180d33e6a8e51f63de92059fb1c273279b0f7ae3adb31a98cde3cada0de9"
+  },
+  {
+    "seq": 8,
+    "timestamp": "2026-08-31T16:02:47.935777Z",
+    "action": "CLIPS_EXTRACTED",
+    "detail": "4 recordings extracted",
+    "prev_hash": "5f4b180d33e6a8e51f63de92059fb1c273279b0f7ae3adb31a98cde3cada0de9",
+    "entry_hash": "f16830c678230a2737c1e409a3aec27ee999e81834831c8ae6c2422615d6bcb4"
+  },
+  {
+    "seq": 9,
+    "timestamp": "2026-08-31T16:02:47.936131Z",
+    "action": "DELETED_RECOVERY",
+    "detail": "2 deleted clips recovered",
+    "prev_hash": "f16830c678230a2737c1e409a3aec27ee999e81834831c8ae6c2422615d6bcb4",
+    "entry_hash": "e609262fe24f46376b7e878a89b16af4aa4e79c15b95daebe7c5c73d11d7afc1"
+  },
+  {
+    "seq": 10,
+    "timestamp": "2026-08-31T16:02:47.937213Z",
+    "action": "TIMELINE_BUILT",
+    "detail": "6 events correlated across cameras",
+    "prev_hash": "e609262fe24f46376b7e878a89b16af4aa4e79c15b95daebe7c5c73d11d7afc1",
+    "entry_hash": "d9ec9e1d757d3bf88c9cc3f73467e81177a242bf6c841b0f26f5cb5b905d990e"
+  },
+  {
+    "seq": 11,
+    "timestamp": "2026-08-31T16:02:47.937922Z",
+    "action": "CUSTODY_CHAIN_VERIFIED",
+    "detail": "True",
+    "prev_hash": "d9ec9e1d757d3bf88c9cc3f73467e81177a242bf6c841b0f26f5cb5b905d990e",
+    "entry_hash": "36cf52d63e865bf72392e8d07d6d6823def90b89eb5909095c4881b9c3408656"
+  }
+]
