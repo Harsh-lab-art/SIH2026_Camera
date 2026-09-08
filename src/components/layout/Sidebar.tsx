@@ -29,9 +29,10 @@ interface SidebarProps {
   onNavigate: (page: Page) => void
   collapsed: boolean
   onToggleCollapse: () => void
+  caseId: string
 }
 
-export function Sidebar({ activePage, onNavigate, collapsed, onToggleCollapse }: SidebarProps) {
+export function Sidebar({ activePage, onNavigate, collapsed, onToggleCollapse, caseId }: SidebarProps) {
   return (
     <motion.aside
       initial={false}
@@ -103,7 +104,7 @@ export function Sidebar({ activePage, onNavigate, collapsed, onToggleCollapse }:
           animate={{ opacity: 1 }}
           style={{ padding: '14px 20px 6px' }}
         >
-          <span className="eyebrow">Case 001 — Active</span>
+          <span className="eyebrow">{caseId} — Active</span>
         </motion.div>
       )}
 

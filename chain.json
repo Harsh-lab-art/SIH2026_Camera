@@ -86,5 +86,29 @@
     "detail": "True",
     "prev_hash": "832b504c552ae535fd26099e24c74632c54fe4391fe7fb4f5098cc1f235acfaf",
     "entry_hash": "a10d51178d0718b9e2a24f90ff5985b625195a317ee55bb499df0f3af1ea57ea"
+  },
+  {
+    "seq": 12,
+    "timestamp": "2026-08-31T13:52:11.876200Z",
+    "action": "DEVICE_RECEIVED",
+    "detail": "Backup storage media verified in evidence locker",
+    "prev_hash": "a10d51178d0718b9e2a24f90ff5985b625195a317ee55bb499df0f3af1ea57ea",
+    "entry_hash": "dbe4ae24b8d52d68e7ca6b54d15175b6ad4cb4cf1d8ea1ffa3d84e29f3be2066"
+  },
+  {
+    "seq": 13,
+    "timestamp": "2026-08-31T13:57:18.482900Z",
+    "action": "VENDOR_IDENTIFIED",
+    "detail": "Camera IDs cross-matched to merchant POS timeline",
+    "prev_hash": "dbe4ae24b8d52d68e7ca6b54d15175b6ad4cb4cf1d8ea1ffa3d84e29f3be2066",
+    "entry_hash": "39102a5a62a14c90cc8c66bdf4d2be7b4dfe9f4f5b3f180eb8e0d9ca5bd1e468"
+  },
+  {
+    "seq": 14,
+    "timestamp": "2026-08-31T14:03:42.913500Z",
+    "action": "CLIPS_EXTRACTED",
+    "detail": "Two additional clips re-exported for analyst review",
+    "prev_hash": "39102a5a62a14c90cc8c66bdf4d2be7b4dfe9f4f5b3f180eb8e0d9ca5bd1e468",
+    "entry_hash": "09245af34d94c69d9da1c7f60f8bae7d18d091f7d52c39191ca84df8581ff36"
   }
 ]

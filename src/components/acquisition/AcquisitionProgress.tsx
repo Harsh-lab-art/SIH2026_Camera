@@ -1,10 +1,13 @@
+import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Activity } from 'lucide-react'
 import { usePipelineStatus } from '../../hooks/usePipelineStatus'
 import { overlayVariants, modalVariants } from '../../motion/variants'
+import { PipelineStage } from '../../types'
 
 interface AcquisitionProgressProps {
   onClose: () => void
+  onStageUpdate: (stage: PipelineStage) => void
 }
 
 const STAGES = [
@@ -18,8 +21,16 @@ const STAGES = [
   { s: 'complete',    label: 'Analysis complete'         },
 ]
 
-export function AcquisitionProgress({ onClose }: AcquisitionProgressProps) {
-  const { stage, stageLabel, progress, isRunning, startPipeline, reset } = usePipelineStatus()
+export function AcquisitionProgress({ onClose, onStageUpdate }: AcquisitionProgressProps) {
+  const { stage, stageLabel, progress, isRunning, startPipeline, reset } = usePipelineStatus(onStageUpdate)
+
+  useEffect(() => {
+    if (stage === 'complete' && !isRunning) {
+      const closeTimer = window.setTimeout(() => onClose(), 900)
+      return () => window.clearTimeout(closeTimer)
+    }
+    return undefined
+  }, [stage, isRunning, onClose])
 
   const stageIndex = (s: string) => STAGES.findIndex(x => x.s === s)
   const currentIdx = stageIndex(stage)
@@ -180,7 +191,7 @@ export function AcquisitionProgress({ onClose }: AcquisitionProgressProps) {
               </button>
             )}
             {!isRunning && stage === 'complete' && (
-              <button className="neo-btn-secondary" onClick={reset} style={{ marginRight: 'auto' }}>
+              <button className="neo-btn-secondary" onClick={() => { reset(); onClose() }} style={{ marginRight: 'auto' }}>
                 Reset
               </button>
             )}

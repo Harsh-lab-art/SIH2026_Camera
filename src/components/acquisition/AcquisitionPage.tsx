@@ -1,21 +1,167 @@
 import { motion } from 'framer-motion'
-import { HardDrive, CheckCircle, Lock, Database } from 'lucide-react'
-import { CaseData } from '../../types'
+import { HardDrive, CheckCircle, Lock, Database, Plus, FolderOpen, Upload, ShieldCheck, FileCheck } from 'lucide-react'
+import { useMemo, useState } from 'react'
+import { CaseData, CustodyAction } from '../../types'
 import { HashVerifyBadge } from './HashVerifyBadge'
 import { listContainerVariants, listItemVariants } from '../../motion/variants'
 import { formatDate } from '../../utils/format'
 
 interface AcquisitionPageProps {
   caseData: CaseData
+  onCaseUpdate: (updater: (current: CaseData) => CaseData) => void
+  onAddCustodyEntry: (action: CustodyAction, detail: string, timestamp?: string) => void
 }
 
-export function AcquisitionPage({ caseData }: AcquisitionPageProps) {
+const MANUAL_ACTIONS: CustodyAction[] = [
+  'CASE_OPENED',
+  'DEVICE_RECEIVED',
+  'ORIGINAL_HASHED',
+  'IMAGE_ACQUIRED',
+  'IMAGE_HASHED',
+  'INTEGRITY_CHECK',
+  'VENDOR_IDENTIFIED',
+  'CLIPS_EXTRACTED',
+  'DELETED_RECOVERY',
+  'TIMELINE_BUILT',
+  'CUSTODY_CHAIN_VERIFIED',
+]
+
+const SUPPORTED_VENDORS = [
+  { name: 'CP Plus', signature: 'CPP_VOLHDR', models: ['CP-X2-NVR', 'CP-UVR-1601'] },
+  { name: 'Dahua Technology', signature: 'DH_FS_MAGIC', models: ['DHI-NVR5216', 'XVR5108'] },
+  { name: 'Hikvision', signature: 'HIK_PART_TAG', models: ['DS-7608NI', 'iDS-7216'] },
+  { name: 'Uniview', signature: 'UNV_INDEX01', models: ['NVR301-08', 'NVR516'] },
+  { name: 'Honeywell Security', signature: 'HONEYWELL_FS', models: ['HNVR-4016'] },
+  { name: 'Matrix', signature: 'MATRIX_NVR', models: ['COSEC ARC'] },
+  { name: 'Godrej', signature: 'GODREJ_NVR', models: ['DVR 16CH'] },
+  { name: 'TP-Link', signature: 'TPLINK_VIGI', models: ['VIGI NVR1008'] },
+]
+
+export function AcquisitionPage({ caseData, onCaseUpdate, onAddCustodyEntry }: AcquisitionPageProps) {
   const { integrity } = caseData
   const deviceEntry = caseData.custodyChain.find(e => e.action === 'DEVICE_RECEIVED')
   const imageEntry = caseData.custodyChain.find(e => e.action === 'IMAGE_ACQUIRED')
 
+  const [manualCaseId, setManualCaseId] = useState(caseData.caseId)
+  const [manualDescription, setManualDescription] = useState(caseData.description)
+  const [manualVendor, setManualVendor] = useState(caseData.device.vendor)
+  const [manualModel, setManualModel] = useState(caseData.device.model)
+  const [customAction, setCustomAction] = useState<CustodyAction>('DEVICE_RECEIVED')
+  const [customDetail, setCustomDetail] = useState('Manual entry added by analyst')
+  const [caseUpdateMessage, setCaseUpdateMessage] = useState('')
+  const [selectedVendor, setSelectedVendor] = useState(caseData.device.vendor)
+  const [selectedEvidence, setSelectedEvidence] = useState<File | null>(null)
+  const [writeBlockerConfirmed, setWriteBlockerConfirmed] = useState(false)
+  const [intakeMessage, setIntakeMessage] = useState('')
+
+  const presetOptions = useMemo(() => [
+    { label: 'Case 001 — Shop theft', value: 'CASE001', description: 'Simulated DVR theft investigation' },
+    { label: 'Case 002 — Retail fraud', value: 'CASE002', description: 'Multi-camera retail dispute review' },
+    { label: 'Case 003 — Asset seizure', value: 'CASE003', description: 'Evidence imaging and chain verification' },
+  ], [])
+
+  const handleApplyManualCase = () => {
+    onCaseUpdate((current) => ({
+      ...current,
+      caseId: manualCaseId.trim() || current.caseId,
+      description: manualDescription.trim() || current.description,
+      device: {
+        ...current.device,
+        vendor: manualVendor.trim() || current.device.vendor,
+        model: manualModel.trim() || current.device.model,
+      },
+    }))
+    setCaseUpdateMessage(`Case details applied at ${new Date().toLocaleTimeString()}`)
+  }
+
+  const handleAddCustomEntry = () => {
+    if (!customDetail.trim()) return
+    onAddCustodyEntry(customAction, customDetail.trim())
+    setCustomDetail('')
+  }
+
+  const handleRegisterEvidence = () => {
+    if (!selectedEvidence || !writeBlockerConfirmed) {
+      setIntakeMessage('Select an evidence image and confirm the write-blocker protocol first.')
+      return
+    }
+
+    const vendor = SUPPORTED_VENDORS.find((item) => item.name === selectedVendor)
+    onCaseUpdate((current) => ({
+      ...current,
+      device: {
+        ...current.device,
+        vendor: selectedVendor,
+        model: manualModel.trim() || vendor?.models[0] || current.device.model,
+        signature: vendor?.signature || current.device.signature,
+      },
+    }))
+    onAddCustodyEntry('DEVICE_RECEIVED', `Evidence registered: ${selectedEvidence.name} (${selectedVendor})`)
+    setIntakeMessage(`Evidence registered at ${new Date().toLocaleTimeString()}. Original remains read-only.`)
+  }
+
   return (
     <div style={{ padding: 'var(--space-8)', maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
+
+      <div className="section">
+        <div className="section-header">
+          <h3 className="section-title">Evidence Intake</h3>
+          <div className="glass-badge" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+            <ShieldCheck size={12} />
+            <span>Prototype write-blocker workflow</span>
+          </div>
+        </div>
+
+        <div className="glass-card" style={{ padding: 'var(--space-5)', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 'var(--space-3)' }}>
+            <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', color: 'var(--color-fg-muted)' }}>
+              Vendor adapter
+              <select
+                className="glass-input"
+                value={selectedVendor}
+                onChange={(event) => {
+                  const vendor = SUPPORTED_VENDORS.find((item) => item.name === event.target.value)
+                  setSelectedVendor(event.target.value)
+                  if (vendor) setManualModel(vendor.models[0])
+                }}
+              >
+                {SUPPORTED_VENDORS.map((vendor) => <option key={vendor.name} value={vendor.name}>{vendor.name}</option>)}
+              </select>
+            </label>
+            <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', color: 'var(--color-fg-muted)' }}>
+              Forensic image / source media
+              <input
+                className="glass-input"
+                type="file"
+                accept=".dd,.e01,.img,.bin,.dav,.mp4,.264"
+                onChange={(event) => setSelectedEvidence(event.target.files?.[0] ?? null)}
+              />
+            </label>
+          </div>
+
+          <label style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--color-fg-secondary)', fontSize: 'var(--text-body-sm)' }}>
+            <input type="checkbox" checked={writeBlockerConfirmed} onChange={(event) => setWriteBlockerConfirmed(event.target.checked)} />
+            Source media is connected through a hardware/software write-blocker and will be treated as immutable.
+          </label>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', flexWrap: 'wrap' }}>
+            <button className="neo-btn-primary" onClick={handleRegisterEvidence} style={{ width: 'fit-content', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Upload size={15} />
+              Register evidence
+            </button>
+            {selectedEvidence && (
+              <span className="glass-badge" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <FileCheck size={12} /> {selectedEvidence.name}
+              </span>
+            )}
+          </div>
+          {intakeMessage && (
+            <span style={{ color: intakeMessage.startsWith('Evidence registered') ? 'var(--color-accent-green)' : 'var(--color-accent-red)', fontSize: 'var(--text-caption)' }}>
+              {intakeMessage}
+            </span>
+          )}
+        </div>
+      </div>
 
       {/* Integrity status banner — glass panel */}
       <motion.div
@@ -66,6 +212,95 @@ export function AcquisitionPage({ caseData }: AcquisitionPageProps) {
           </p>
         </div>
       </motion.div>
+
+      <div className="section">
+        <div className="section-header">
+          <h3 className="section-title">Manual Case Selection</h3>
+          <div className="glass-badge" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+            <FolderOpen size={12} />
+            <span>Preset / manual review</span>
+          </div>
+        </div>
+
+        <div className="glass-card" style={{ padding: 'var(--space-5)', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 'var(--space-3)' }}>
+            <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', color: 'var(--color-fg-muted)' }}>
+              Case ID
+              <input value={manualCaseId} onChange={(e) => setManualCaseId(e.target.value)} className="glass-input" />
+            </label>
+            <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', color: 'var(--color-fg-muted)' }}>
+              Device Vendor
+              <input value={manualVendor} onChange={(e) => setManualVendor(e.target.value)} className="glass-input" />
+            </label>
+            <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', color: 'var(--color-fg-muted)' }}>
+              Device Model
+              <input value={manualModel} onChange={(e) => setManualModel(e.target.value)} className="glass-input" />
+            </label>
+            <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', color: 'var(--color-fg-muted)' }}>
+              Preset selection
+              <select
+                className="glass-input"
+                onChange={(e) => {
+                  const preset = presetOptions.find((item) => item.value === e.target.value)
+                  if (!preset) return
+                  setManualCaseId(preset.value)
+                  setManualDescription(preset.description)
+                }}
+                defaultValue=""
+              >
+                <option value="" disabled>Select a preset</option>
+                {presetOptions.map((option) => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', color: 'var(--color-fg-muted)' }}>
+            Case description
+            <input value={manualDescription} onChange={(e) => setManualDescription(e.target.value)} className="glass-input" />
+          </label>
+
+          <button className="neo-btn-primary" onClick={handleApplyManualCase} style={{ width: 'fit-content' }}>
+            Apply case details
+          </button>
+          {caseUpdateMessage && (
+            <span style={{ color: 'var(--color-accent-green)', fontSize: 'var(--text-caption)' }}>
+              {caseUpdateMessage}
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className="section">
+        <div className="section-header">
+          <h3 className="section-title">Add Manual Custody Entry</h3>
+          <div className="glass-badge" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+            <Plus size={12} />
+            <span>Live chain update</span>
+          </div>
+        </div>
+
+        <div className="glass-card" style={{ padding: 'var(--space-5)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-3)' }}>
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', color: 'var(--color-fg-muted)' }}>
+            Action
+            <select value={customAction} onChange={(e) => setCustomAction(e.target.value as CustodyAction)} className="glass-input">
+              {MANUAL_ACTIONS.map((action) => (
+                <option key={action} value={action}>{action}</option>
+              ))}
+            </select>
+          </label>
+
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', color: 'var(--color-fg-muted)', gridColumn: '1 / -1' }}>
+            Detail
+            <input value={customDetail} onChange={(e) => setCustomDetail(e.target.value)} className="glass-input" />
+          </label>
+
+          <button className="neo-btn-primary" onClick={handleAddCustomEntry} style={{ width: 'fit-content' }}>
+            Add chain entry
+          </button>
+        </div>
+      </div>
 
       {/* Hash comparison */}
       <div className="section">

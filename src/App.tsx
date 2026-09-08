@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Play } from 'lucide-react'
 
@@ -17,13 +17,24 @@ import { CustodyPage } from './components/custody/CustodyPage'
 import { ReportPage } from './components/report/ReportPage'
 
 import { useCase } from './hooks/useCase'
-import { Page } from './types'
+import { CaseData, Page, PipelineStage } from './types'
 
 export default function App() {
-  const { caseData } = useCase()
+  const { caseData, updateCase, addCustodyEntry, applyPipelineStage } = useCase()
   const [activePage, setActivePage] = useState<Page>('dashboard')
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [showAcquisitionModal, setShowAcquisitionModal] = useState(false)
+
+  const handlePipelineStage = useCallback((stage: PipelineStage) => {
+    applyPipelineStage(stage)
+    if (stage === 'complete') {
+      setActivePage('report')
+    }
+  }, [applyPipelineStage])
+
+  const handleManualCaseUpdate = useCallback((updater: (current: CaseData) => CaseData) => {
+    updateCase(updater)
+  }, [updateCase])
 
   if (!caseData) {
     return (
@@ -45,15 +56,23 @@ export default function App() {
 
   const renderPage = () => {
     switch (activePage) {
-      case 'dashboard':   return <Dashboard caseData={caseData} onNavigate={setActivePage} />
-      case 'acquisition': return <AcquisitionPage caseData={caseData} />
-      case 'device':      return <DevicePage caseData={caseData} />
-      case 'clips':       return <ClipsPage caseData={caseData} />
-      case 'recovery':    return <RecoveryPage caseData={caseData} />
-      case 'timeline':    return <TimelinePage caseData={caseData} />
-      case 'custody':     return <CustodyPage caseData={caseData} />
-      case 'report':      return <ReportPage caseData={caseData} />
-      default:            return <Dashboard caseData={caseData} onNavigate={setActivePage} />
+      case 'dashboard':
+        return <Dashboard caseData={caseData} onNavigate={setActivePage} />
+      case 'acquisition':
+        return (
+          <AcquisitionPage
+            caseData={caseData}
+            onCaseUpdate={handleManualCaseUpdate}
+            onAddCustodyEntry={addCustodyEntry}
+          />
+        )
+      case 'device': return <DevicePage caseData={caseData} />
+      case 'clips': return <ClipsPage caseData={caseData} />
+      case 'recovery': return <RecoveryPage caseData={caseData} />
+      case 'timeline': return <TimelinePage caseData={caseData} />
+      case 'custody': return <CustodyPage caseData={caseData} />
+      case 'report': return <ReportPage caseData={caseData} />
+      default: return <Dashboard caseData={caseData} onNavigate={setActivePage} />
     }
   }
 
@@ -75,6 +94,7 @@ export default function App() {
         onNavigate={setActivePage}
         collapsed={sidebarCollapsed}
         onToggleCollapse={() => setSidebarCollapsed(p => !p)}
+        caseId={caseData.caseId}
       />
 
       {/* Main column: topbar + content */}
@@ -125,7 +145,10 @@ export default function App() {
       {/* Acquisition modal */}
       <AnimatePresence>
         {showAcquisitionModal && (
-          <AcquisitionProgress onClose={() => setShowAcquisitionModal(false)} />
+          <AcquisitionProgress
+            onClose={() => setShowAcquisitionModal(false)}
+            onStageUpdate={handlePipelineStage}
+          />
         )}
       </AnimatePresence>
     </div>

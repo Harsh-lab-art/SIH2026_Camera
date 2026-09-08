@@ -84,7 +84,7 @@ export function Dashboard({ caseData, onNavigate }: DashboardProps) {
         }} />
 
         <div>
-          <p className="eyebrow" style={{ marginBottom: 6 }}>Case 001 — Active</p>
+          <p className="eyebrow" style={{ marginBottom: 6 }}>{caseData.caseId} — Active</p>
           <h2 style={{
             fontSize: 'var(--text-h2)', fontWeight: 700,
             color: 'var(--color-fg-primary)', margin: 0,

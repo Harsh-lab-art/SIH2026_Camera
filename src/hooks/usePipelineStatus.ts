@@ -27,7 +27,7 @@ interface UsePipelineStatusReturn {
   reset: () => void
 }
 
-export function usePipelineStatus(): UsePipelineStatusReturn {
+export function usePipelineStatus(onStageChange?: (stage: PipelineStage) => void): UsePipelineStatusReturn {
   const [stage, setStage] = useState<PipelineStage>('idle')
   const [stageLabel, setStageLabel] = useState('Ready')
   const [progress, setProgress] = useState(0)
@@ -48,6 +48,7 @@ export function usePipelineStatus(): UsePipelineStatusReturn {
       setStage(step.stage)
       setStageLabel(step.label)
       setProgress(Math.round((stepIndex / totalSteps) * 100))
+      onStageChange?.(step.stage)
 
       if (step.stage === 'complete') {
         setProgress(100)
@@ -60,7 +61,7 @@ export function usePipelineStatus(): UsePipelineStatusReturn {
     }
 
     runStep()
-  }, [isRunning])
+  }, [isRunning, onStageChange])
 
   const reset = useCallback(() => {
     if (timerRef.current) clearTimeout(timerRef.current)
