@@ -29,6 +29,13 @@ body {
   font-family: var(--font-sans);
   font-size: var(--text-body);
   line-height: var(--leading-normal);
+  background-image:
+    radial-gradient(circle at 78% 8%, rgba(41, 156, 255, 0.12), transparent 28rem),
+    radial-gradient(circle at 18% 72%, rgba(164, 119, 255, 0.08), transparent 24rem),
+    linear-gradient(rgba(22, 230, 209, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 230, 209, 0.025) 1px, transparent 1px);
+  background-size: auto, auto, 48px 48px, 48px 48px;
+  background-attachment: fixed;
 }
 
 #root {
@@ -52,13 +59,13 @@ a { color: var(--color-accent-blue); text-decoration: none; }
 }
 
 ::selection {
-  background-color: rgba(59, 110, 224, 0.15);
+  background-color: rgba(22, 230, 209, 0.22);
   color: var(--color-fg-primary);
 }
 
 /* Thin scrollbar */
 ::-webkit-scrollbar        { width: 5px; height: 5px; }
-::-webkit-scrollbar-track  { background: var(--color-bg-secondary); }
+::-webkit-scrollbar-track  { background: var(--color-bg-primary); }
 ::-webkit-scrollbar-thumb  { background: var(--color-border-secondary); border-radius: var(--radius-full); }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-fg-disabled); }
 * { scrollbar-width: thin; scrollbar-color: var(--color-border-secondary) var(--color-bg-secondary); }
@@ -158,13 +165,13 @@ a { color: var(--color-accent-blue); text-decoration: none; }
   font-size:   var(--text-caption);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
-  border-bottom: 1px solid rgba(198, 205, 216, 0.5);
-  background: rgba(255, 255, 255, 0.35);
+  border-bottom: 1px solid rgba(83, 178, 255, 0.14);
+  background: rgba(10, 30, 52, 0.72);
 }
 
 .data-table td {
   padding: var(--space-3) var(--space-4);
-  border-bottom: 1px solid rgba(198, 205, 216, 0.3);
+  border-bottom: 1px solid rgba(83, 178, 255, 0.10);
   color: var(--color-fg-secondary);
 }
 
@@ -175,7 +182,7 @@ a { color: var(--color-accent-blue); text-decoration: none; }
 }
 
 .data-table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(22, 230, 209, 0.06);
 }
 
 /* ============================================

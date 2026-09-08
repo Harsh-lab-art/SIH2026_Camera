@@ -45,11 +45,11 @@ export function Sidebar({ activePage, onNavigate, collapsed, onToggleCollapse, c
         flexShrink: 0,
         display: 'flex',
         flexDirection: 'column',
-        background: 'rgba(255,255,255,0.6)',
+           background: 'rgba(4, 14, 28, 0.88)',
         backdropFilter: 'blur(14px) saturate(160%)',
         WebkitBackdropFilter: 'blur(14px) saturate(160%)',
-        borderRight: '1px solid rgba(255,255,255,0.5)',
-        boxShadow: '2px 0 16px rgba(31,41,61,0.06)',
+           borderRight: '1px solid rgba(83,178,255,0.18)',
+           boxShadow: '8px 0 28px rgba(0,0,0,0.32), inset -1px 0 rgba(22,230,209,0.05)',
         overflow: 'hidden',
         zIndex: 200,
       }}
@@ -61,7 +61,7 @@ export function Sidebar({ activePage, onNavigate, collapsed, onToggleCollapse, c
           display: 'flex',
           alignItems: 'center',
           padding: collapsed ? '0 18px' : '0 20px',
-          borderBottom: '1px solid rgba(198,205,216,0.4)',
+             borderBottom: '1px solid rgba(83,178,255,0.14)',
           flexShrink: 0,
           gap: '10px',
         }}
@@ -144,10 +144,10 @@ export function Sidebar({ activePage, onNavigate, collapsed, onToggleCollapse, c
                     fontWeight: isActive ? 600 : 400,
                     color: isActive ? 'var(--color-fg-primary)' : 'var(--color-fg-muted)',
                     background: isActive
-                      ? 'rgba(255,255,255,0.75)'
+                       ? 'linear-gradient(90deg, rgba(41,156,255,0.24), rgba(22,230,209,0.08))'
                       : 'transparent',
                     boxShadow: isActive
-                      ? '3px 3px 8px var(--neo-dark), -3px -3px 8px var(--neo-light)'
+                       ? 'inset 3px 0 var(--color-accent-cyan), 0 0 18px rgba(41,156,255,0.12)'
                       : 'none',
                     transition: 'all var(--duration-fast) var(--ease-out)',
                     position: 'relative',
@@ -157,7 +157,7 @@ export function Sidebar({ activePage, onNavigate, collapsed, onToggleCollapse, c
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) {
-                      e.currentTarget.style.background = 'rgba(255,255,255,0.5)'
+                      e.currentTarget.style.background = 'rgba(41,156,255,0.10)'
                       e.currentTarget.style.color = 'var(--color-fg-secondary)'
                     }
                   }}
@@ -218,7 +218,7 @@ export function Sidebar({ activePage, onNavigate, collapsed, onToggleCollapse, c
       {/* Collapse toggle */}
       <div style={{
         padding: '12px 12px',
-        borderTop: '1px solid rgba(198,205,216,0.4)',
+        borderTop: '1px solid rgba(83,178,255,0.14)',
       }}>
         <button
           onClick={onToggleCollapse}

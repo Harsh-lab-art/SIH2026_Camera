@@ -1,11 +1,9 @@
 :root {
   /* ============================================
-     NEOMORPHISM TOKENS — light theme
-     neo-light = #ffffff  neo-dark = #c6cdd8
-     bg = #eef1f5
+    NEOMORPHISM TOKENS — dark technical surfaces
      ============================================ */
 
-  --neo-bg: #eef1f5;
+  --neo-bg: #0a1a2d;
 
   /* Raised */
   --shadow-neo-raised:
@@ -56,9 +54,9 @@
    -6px -6px 14px 0 var(--neo-light);
 
   /* Gradient for neo surfaces */
-  --neo-gradient:         linear-gradient(145deg, #f4f6fa 0%, #e4e9f0 100%);
-  --neo-gradient-primary: linear-gradient(145deg, #f4f6fa 0%, #e4e9f0 100%);
-  --neo-gradient-success: linear-gradient(145deg, #f4f6fa 0%, #e4e9f0 100%);
+  --neo-gradient:         linear-gradient(145deg, #12304b 0%, #071322 100%);
+  --neo-gradient-primary: linear-gradient(145deg, #12304b 0%, #071322 100%);
+  --neo-gradient-success: linear-gradient(145deg, #123d3d 0%, #071b24 100%);
 }
 
 /* ============================================
@@ -287,7 +285,7 @@
 .neo-progress-fill::after {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(22,230,209,0.28), transparent);
   animation: shimmer 2s infinite;
 }
 

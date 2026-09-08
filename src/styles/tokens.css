@@ -1,47 +1,49 @@
 :root {
   /* ============================================
-     COLOR TOKENS — Light Minimalist Palette
-     Matches mockup: --bg #eef1f5, accent #3b6ee0
+   COLOR TOKENS — forensic command-center palette
      ============================================ */
 
   /* Background layers */
-  --color-bg-primary:   #eef1f5;
-  --color-bg-secondary: #e4e9f0;
-  --color-bg-tertiary:  #d8dfea;
-  --color-bg-hover:     #dde3ee;
-  --color-bg-active:    #cdd5e3;
-  --color-bg-surface:   #ffffff;
+   --color-bg-primary:   #050b15;
+   --color-bg-secondary: #091323;
+   --color-bg-tertiary:  #0d1b2e;
+   --color-bg-hover:     #10233b;
+   --color-bg-active:    #153252;
+   --color-bg-surface:   #0b1728;
 
   /* Foreground / Text */
-  --color-fg-primary:   #1c2230;
-  --color-fg-secondary: #3b4560;
-  --color-fg-muted:     #626c7d;
-  --color-fg-disabled:  #98a1b0;
+   --color-fg-primary:   #e8f4ff;
+   --color-fg-secondary: #a9c2d8;
+   --color-fg-muted:     #7189a1;
+   --color-fg-disabled:  #49627d;
 
   /* Accent — blue from mockup */
-  --color-accent-blue:       #3b6ee0;
-  --color-accent-blue-hover: #2b5ccc;
-  --color-accent-blue-muted: rgba(59, 110, 224, 0.12);
+   --color-accent-blue:       #299cff;
+   --color-accent-blue-hover: #5ab5ff;
+   --color-accent-blue-muted: rgba(41, 156, 255, 0.14);
+   --color-accent-cyan:       #16e6d1;
+   --color-accent-violet:     #a477ff;
+   --color-accent-magenta:    #ed4dba;
 
   /* Success green */
-  --color-accent-green:       #1f9d6b;
-  --color-accent-green-hover: #178058;
-  --color-accent-green-muted: rgba(31, 157, 107, 0.12);
+   --color-accent-green:       #23d6a0;
+   --color-accent-green-hover: #50edbb;
+   --color-accent-green-muted: rgba(35, 214, 160, 0.14);
 
   /* Amber */
-  --color-accent-amber:       #d97706;
-  --color-accent-amber-hover: #b45309;
-  --color-accent-amber-muted: rgba(217, 119, 6, 0.12);
+   --color-accent-amber:       #f6b84b;
+   --color-accent-amber-hover: #ffd277;
+   --color-accent-amber-muted: rgba(246, 184, 75, 0.14);
 
   /* Red */
-  --color-accent-red:       #dc2626;
-  --color-accent-red-hover: #b91c1c;
-  --color-accent-red-muted: rgba(220, 38, 38, 0.12);
+   --color-accent-red:       #ff5578;
+   --color-accent-red-hover: #ff7894;
+   --color-accent-red-muted: rgba(255, 85, 120, 0.14);
 
   /* Borders */
-  --color-border-primary:   rgba(255, 255, 255, 0.35);
-  --color-border-secondary: #c6cdd8;
-  --color-border-focus:     #3b6ee0;
+   --color-border-primary:   rgba(88, 174, 255, 0.18);
+   --color-border-secondary: #1b3855;
+   --color-border-focus:     #16e6d1;
 
   /* Status semantic */
   --color-status-idle:       #98a1b0;
@@ -57,15 +59,15 @@
      NEOMORPHISM SHADOW PAIRS — light theme
      neo-light = #ffffff  neo-dark = #c6cdd8
      ============================================ */
-  --neo-light: #ffffff;
-  --neo-dark:  #c6cdd8;
+   --neo-light: rgba(37, 72, 105, 0.55);
+   --neo-dark:  #020711;
 
   /* ============================================
      TYPOGRAPHY TOKENS
      ============================================ */
 
-  --font-sans: 'Inter', -apple-system, 'Segoe UI', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+   --font-sans: 'Space Grotesk', 'IBM Plex Sans', 'Segoe UI', sans-serif;
+   --font-mono: 'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', monospace;
 
   --text-display: clamp(2.5rem, 5vw, 4.5rem);
   --text-h1:      clamp(1.75rem, 4vw, 2.5rem);
